@@ -1,0 +1,13 @@
+@import url(./auth-modal__title/auth-modal__title.css);
+@import url(./auth-modal__status/auth-modal__status.css);
+@import url(./auth-modal__status-link/auth-modal__status-link.css);
+
+.auth-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  background-color: rgba(0,0,0,1);
+}
