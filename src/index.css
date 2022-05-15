@@ -1,5 +1,9 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/inter.css);
+@import url(./blocks/auth-modal/auth-modal.css);
+@import url(./blocks/auth-modal/__submit/_inactive/auth-modal__submit_inactive.css);
+@import url(./blocks/auth-modal/__input-error/_active/auth-modal__input-error_active.css);
+@import url(./blocks/auth-modal/__input/_type/auth-modal__input_type_error.css);
 @import url(./blocks/card/card.css);
 @import url(./blocks/card/_remove/card_remove.css);
 @import url(./blocks/card/_active/card__like-icon_active.css);
@@ -22,6 +26,7 @@
 @import url(./blocks/popup/_open/popup_open.css);
 @import url(./blocks/card/card__delete_hidden.css);
 @import url(./blocks/card/card__delete_visible.css);
-@import url(./blocks/form/_dark/form_dark.css);
-@import url(./blocks/auth-modal/auth-modal.css);
+
+
+
 

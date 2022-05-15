@@ -27,18 +27,19 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
-  const[password, setPassword] = useState("")
+  // const [authorized, setAuthorized] = useState('');
 
   const history = useHistory();
 
   const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      checkToken(jwt).then((res) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      checkToken(token).then((res) => {
         if (res) {
           setLoggedIn(true);
-          history.push("/");
+          history("/");
+        } else {
+          localStorage.removeItem("token")
         }
       })
         .catch((err) => console.log(err))
@@ -47,19 +48,20 @@ function App() {
 
   const handleLogin = () => {
     setLoggedIn(true);
+    history.push("/");
   };
 
   const handleLogout = () => {
     setLoggedIn(false);
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('token');
     history.push('/signin');
   }
 
-  const handleRegisterSubmit = () => {
-    register(password, email)
+  const handleRegisterSubmit = (email, password) => {
+    register(email, password)
       .then((res) => {
-        if (res.data.email) {
-          console.log('Success');
+        if (res) {
+
           history.push('/signin');
         } else {
           console.log('Something went wrong.');
@@ -70,21 +72,18 @@ function App() {
       })
   }
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = (email, password) => {
     authorize(email, password)
       .then((data) => {
-
         if (data) {
-          setEmail('')
-          setPassword('')
-          handleLogin()
-          history.push('/')
+          handleLogin();
+          handleTokenCheck();
         }
-      })
-      .catch(err => console.error(err)
-    )}
 
+      })
+      .catch((err) => {
+        console.error(err)}
+    )}
 
   //Cards and profile rendering//
   useEffect(() => {
@@ -92,10 +91,12 @@ function App() {
       .then(([profile, cardData]) => {
         setCurrentUser(profile)
         setCards(cardData)
-      },
-      handleTokenCheck()
-      )
+      })
       .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    handleTokenCheck();
   }, []);
 
   //Profile popup validation//
@@ -224,9 +225,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <Header loggedIn={loggedIn} handleLogout={handleLogout} />
+        <Header />
         <Switch>
-          <ProtectedRoute exact path="/" loggedIn={loggedIn}>
+          <ProtectedRoute exact path="/" loggedIn={loggedIn} >
             <Main
               onEditAvatarClick={handleEditAvatarClick}
               onEditProfileClick={handleEditProfileClick}
@@ -238,25 +239,27 @@ function App() {
             </Main>
           </ProtectedRoute>
           <Route path="/signin">
-            <Login handleSubmit={handleLoginSubmit} email={email} password={password} />
+            <Login handleLoginSubmit={handleLoginSubmit}  />
           </Route>
           <Route path="/signup">
-            <Register handleSubmit={handleRegisterSubmit} email={email} password={password} />
+            <Register handleRegisterSubmit={handleRegisterSubmit}  />
           </Route>
-          <Route path="*" >
+          <Route path="*">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onUpdateAvatar={handleUpdateAvatar} />
-
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onUpdateUser={handleUpdateUser} />
-
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onAddPlaceSubmit={handleAddPlaceSubmit} />
-
-            <DeleteConfirmationPopup isOpen={isDeletePopupOpen} card={cardDelete} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onDeleteConfirmation={handleCardDelete} />
-
-            <ImagePopup card={selectedCard} name={'place'} onClose={closeAllPopups} overlayCloseByClick={closeAllPopups} onOverlayClick={handleOverlayClick} />
         <Footer />
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onUpdateAvatar={handleUpdateAvatar} />
+
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onUpdateUser={handleUpdateUser} />
+
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onAddPlaceSubmit={handleAddPlaceSubmit} />
+
+        <DeleteConfirmationPopup isOpen={isDeletePopupOpen} card={cardDelete} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onDeleteConfirmation={handleCardDelete} />
+
+        <ImagePopup card={selectedCard} name={'place'} onClose={closeAllPopups} overlayCloseByClick={closeAllPopups} onOverlayClick={handleOverlayClick} />
+
       </div>
     </CurrentUserContext.Provider>
   );

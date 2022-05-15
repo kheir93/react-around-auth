@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import * as auth from '../utils/auth'
 import { AppContext } from "../contexts/CurrentUserContext"
 import SignForm from './SignForm';
 
-class Login extends React.Component {
-  static contextType = AppContext;
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = props.handleSubmit;
-    this.state.email = props.email;
-    this.state.password = props.password
-  };
+const Login = ({ handleLoginSubmit }) => {
+  // static contextType = AppContext;
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
   }
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLoginSubmit(email, password);
+  }
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInputValues(() => ({ [name]: value }))
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = inputValues;
+  //   handleLoginSubmit(password, email)
+  // }
+
 
   // handleSubmit(e) {
   //   const context = this.context;
@@ -49,13 +59,12 @@ class Login extends React.Component {
   //     .catch(err => console.log(err));
   // };
 
-  render() {
-    return (
-      <div className="form">
-        <SignForm title="Log in" handleSubmit={this.handleSubmit} handleChange={this.handleChange} authMode="Not a member yet?" authAction="Sign up here!" link={'/signup'} email={this.state.email} password={this.state.password} />
-      </div>
-    )
-  }
+
+  return (
+    <div className="auth-modal">
+      <SignForm title="Log in" onSubmit={handleSubmit} onChangeEmail={onChangeEmail} onChangePassword={onChangePassword} authMode="Not a member yet? " authAction="Sign up here!" link={'/signup'} email={email} password={password}/>
+    </div>
+  )
 };
 
 export default withRouter(Login);

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Redirect } from "react-router-dom";
 import { AppContext } from "../contexts/CurrentUserContext"
 
-const ProtectedRoute = ({ children, loggedIn }) => {
+const ProtectedRoute = ({ children, loggedIn, ...props }) => {
   return (
-    <Route>{loggedIn ? children : <Redirect to="/login" />}</Route>
+    <Route {...props}>{loggedIn ? children : <Redirect to="/signin" />}</Route>
   )
 }
 
