@@ -5,8 +5,6 @@ import * as auth from '../utils/auth'
 
 const Register = ({ handleRegisterSubmit}) => {
 
-  const [inputValues, setInputValues] = useState({ email: '', password: '' });
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

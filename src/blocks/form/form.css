@@ -4,6 +4,8 @@
 @import url(./__input-error/form__input-error.css);
 @import url(./__save/form__save.css);
 @import url(./__title/form__title.css);
+@import url(./__image/form__image.css);
+
 
 .form {
   z-index: 10;

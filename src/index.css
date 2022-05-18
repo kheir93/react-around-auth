@@ -4,7 +4,6 @@
 @import url(./blocks/auth-modal/__submit/_inactive/auth-modal__submit_inactive.css);
 @import url(./blocks/auth-modal/__input-error/_active/auth-modal__input-error_active.css);
 @import url(./blocks/auth-modal/__input/_type/auth-modal__input_type_error.css);
-@import url(./blocks/tooltip-modal/tooltip-modal.css);
 @import url(./blocks/card/card.css);
 @import url(./blocks/card/_remove/card_remove.css);
 @import url(./blocks/card/_active/card__like-icon_active.css);
@@ -15,6 +14,7 @@
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/form/form.css);
+@import url(./blocks/form/__title/_center/form__title_center.css);
 @import url(./blocks/form/__save/_inactive/form__save_inactive.css);
 @import url(./blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(./blocks/form/__input/_type/form__input_type_error.css);
@@ -23,10 +23,13 @@
 @import url(./blocks/add-modal/add-modal.css);
 @import url(./blocks/place-modal/place-modal.css);
 @import url(./blocks/delete-modal/delete-modal.css);
+@import url(./blocks/tooltip-modal/tooltip-modal.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/_open/popup_open.css);
 @import url(./blocks/card/card__delete_hidden.css);
 @import url(./blocks/card/card__delete_visible.css);
+
+
 
 
 
