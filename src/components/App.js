@@ -8,6 +8,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
+import Tooltip from "./Tooltip";
 import { CurrentUserContext } from "../contexts/CurrentUserContext"
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
 import { register, authorize, checkToken } from "../utils/auth";
@@ -27,6 +28,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [tooltipWindow, setTooltipWindow] = useState(false)
+  const [tooltipOpen, setTooltipOpen] = useState(false)
   // const [authorized, setAuthorized] = useState('');
 
   const history = useHistory();
@@ -37,7 +40,7 @@ function App() {
       checkToken(token).then((res) => {
         if (res) {
           setLoggedIn(true);
-          history("/");
+          history.push("/");
         } else {
           localStorage.removeItem("token")
         }
@@ -61,14 +64,19 @@ function App() {
     register(email, password)
       .then((res) => {
         if (res) {
-
           history.push('/signin');
+          setTooltipOpen(true);
+          setTooltipWindow(true);
         } else {
           console.log('Something went wrong.');
+          setTooltipOpen(true);
+          setTooltipWindow(false);
         }
       })
       .catch((err) => {
         console.log(err);
+        setTooltipOpen(true);
+        setTooltipWindow(false)
       })
   }
 
@@ -79,7 +87,6 @@ function App() {
           handleLogin();
           handleTokenCheck();
         }
-
       })
       .catch((err) => {
         console.error(err)}
@@ -177,6 +184,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsDeletePopupOpen(false);
     setSelectedCard(null);
+    setTooltipOpen(false);
   }
 
   //Escape key binding//
@@ -225,7 +233,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <Header />
+        <Header logout={handleLogout} />
         <Switch>
           <ProtectedRoute exact path="/" loggedIn={loggedIn} >
             <Main
@@ -259,7 +267,7 @@ function App() {
         <DeleteConfirmationPopup isOpen={isDeletePopupOpen} card={cardDelete} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onDeleteConfirmation={handleCardDelete} />
 
         <ImagePopup card={selectedCard} name={'place'} onClose={closeAllPopups} overlayCloseByClick={closeAllPopups} onOverlayClick={handleOverlayClick} />
-
+        <Tooltip isOpen={tooltipOpen} unionStatus={tooltipWindow} onClose={closeAllPopups} onOverlayClick={handleOverlayClick}></Tooltip>
       </div>
     </CurrentUserContext.Provider>
   );

@@ -4,6 +4,7 @@
 @import url(./blocks/auth-modal/__submit/_inactive/auth-modal__submit_inactive.css);
 @import url(./blocks/auth-modal/__input-error/_active/auth-modal__input-error_active.css);
 @import url(./blocks/auth-modal/__input/_type/auth-modal__input_type_error.css);
+@import url(./blocks/tooltip-modal/tooltip-modal.css);
 @import url(./blocks/card/card.css);
 @import url(./blocks/card/_remove/card_remove.css);
 @import url(./blocks/card/_active/card__like-icon_active.css);
