@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import SignForm from './SignForm'
 import * as auth from '../utils/auth'
 
-const Register = ({ handleRegisterSubmit}) => {
+const Register = ({ handleRegisterSubmit }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

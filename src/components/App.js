@@ -30,7 +30,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [tooltipWindow, setTooltipWindow] = useState(false)
   const [tooltipOpen, setTooltipOpen] = useState(false)
-  // const [authorized, setAuthorized] = useState('');
 
   const history = useHistory();
 
@@ -64,9 +63,8 @@ function App() {
     register(email, password)
       .then((res) => {
         if (res) {
-          history.push('/signin');
-          setTooltipOpen(true);
           setTooltipWindow(true);
+          history.push('/signin');
         } else {
           console.log('Something went wrong.');
           setTooltipOpen(true);
@@ -75,10 +73,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        setTooltipOpen(true);
-        setTooltipWindow(false)
+        setTooltipWindow(false);
       })
-  }
+      .finally(() => setTooltipOpen(true))
+    };
 
   const handleLoginSubmit = (email, password) => {
     authorize(email, password)
@@ -89,7 +87,8 @@ function App() {
         }
       })
       .catch((err) => {
-        console.error(err)}
+        console.error(err)
+      }
     )}
 
   //Cards and profile rendering//
@@ -250,7 +249,7 @@ function App() {
             <Login handleLoginSubmit={handleLoginSubmit}  />
           </Route>
           <Route path="/signup">
-            <Register handleRegisterSubmit={handleRegisterSubmit}  />
+            <Register handleRegisterSubmit={handleRegisterSubmit} />
           </Route>
           <Route path="*">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}

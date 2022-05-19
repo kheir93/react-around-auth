@@ -1,5 +1,6 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/inter.css);
+@import url(./blocks/tooltip-modal/tooltip-modal.css);
 @import url(./blocks/auth-modal/auth-modal.css);
 @import url(./blocks/auth-modal/__submit/_inactive/auth-modal__submit_inactive.css);
 @import url(./blocks/auth-modal/__input-error/_active/auth-modal__input-error_active.css);
@@ -23,7 +24,6 @@
 @import url(./blocks/add-modal/add-modal.css);
 @import url(./blocks/place-modal/place-modal.css);
 @import url(./blocks/delete-modal/delete-modal.css);
-@import url(./blocks/tooltip-modal/tooltip-modal.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/_open/popup_open.css);
 @import url(./blocks/card/card__delete_hidden.css);
