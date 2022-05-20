@@ -86,9 +86,7 @@ function App() {
           handleTokenCheck();
         }
       })
-      .catch((err) => {
-        console.error(err)
-      }
+      .catch((err) => console.error(err)
     )}
 
   //Cards and profile rendering//

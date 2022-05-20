@@ -21,9 +21,6 @@ export const register = (email, password) => {
     .then((data) => {
       return data;
     })
-    .catch((err) => {
-      console.log(err)
-    })
 };
 
 export const authorize = (email, password) => {

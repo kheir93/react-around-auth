@@ -6,7 +6,6 @@
 @import url(./__title/form__title.css);
 @import url(./__image/form__image.css);
 
-
 .form {
   z-index: 10;
   /*position: relative;*/
