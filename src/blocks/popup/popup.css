@@ -10,4 +10,5 @@
 .popup {
   display: none;
   animation: fadein 0.5s;
+  color: #000;
 }
