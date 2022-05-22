@@ -3,3 +3,9 @@
   color: #fff;
   font-size: 14px;
 }
+
+@media screen and (max-width: 320px) {
+  .auth-modal__status-link {
+    font-size: 12px;
+  }
+}

@@ -14,5 +14,3 @@ export default function PopupWithForm({ isOpen, submitValue, name, onClose, chil
     </div>
   );
 }
-
-

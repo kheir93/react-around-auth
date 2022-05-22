@@ -1,8 +1,6 @@
-.header__logout-button {
-  width: 85px;
-  margin-right: 0;
-  margin-left: 24px;
-  color: #A9A9A9;
+.header__user-display-info {
+  color: #fff;
+  margin-left: auto;
   border: 0;
   box-sizing: border-box;
   background-color: transparent;
@@ -13,13 +11,8 @@
   padding-bottom: 14px;
 }
 
-.header__logout-button:hover {
-  cursor: pointer;
-}
-
 @media (max-width: 400px) {
-  .header__logout-button {
-    display: none
+  .header__user-display-info {
+    display: none;
   }
 }
-

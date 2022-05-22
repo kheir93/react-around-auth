@@ -5,8 +5,9 @@
   height: 33px;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 400px) {
   .logo {
+    padding-top: 30px;
     margin-left: 20px;
     width: 126px;
     height: 24px;

@@ -12,12 +12,13 @@
 
 @media (max-width: 768px) {
   .profile__avatar {
-    max-width: 50%;
+    width: 50%;
   }
 }
 
 @media (max-width: 320px) {
   .profile__avatar {
+    width: 130px;
     margin: 0 auto 30px;
   }
 }

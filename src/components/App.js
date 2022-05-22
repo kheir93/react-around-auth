@@ -28,8 +28,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [tooltipWindow, setTooltipWindow] = useState(false)
-  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const [tooltipWindow, setTooltipWindow] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
 
   const history = useHistory();
 
@@ -38,6 +39,7 @@ function App() {
     if (token) {
       checkToken(token).then((res) => {
         if (res) {
+          setUserEmail(res.data.email)
           setLoggedIn(true);
           history.push("/");
         } else {
@@ -229,7 +231,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <Header logout={handleLogout} />
+        <Header logout={handleLogout} userEmail={userEmail} signup={<Redirect to="/signup" />} />
         <Switch>
           <ProtectedRoute exact path="/" loggedIn={loggedIn} >
             <Main
@@ -263,7 +265,7 @@ function App() {
         <DeleteConfirmationPopup isOpen={isDeletePopupOpen} card={cardDelete} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} onDeleteConfirmation={handleCardDelete} />
 
         <ImagePopup card={selectedCard} name={'place'} onClose={closeAllPopups} overlayCloseByClick={closeAllPopups} onOverlayClick={handleOverlayClick} />
-        <Tooltip isOpen={tooltipOpen} unionStatus={tooltipWindow} onClose={closeAllPopups} onOverlayClick={handleOverlayClick}></Tooltip>
+        <Tooltip isOpen={tooltipOpen} unionStatus={tooltipWindow} onClose={closeAllPopups} onOverlayClick={handleOverlayClick} />
       </div>
     </CurrentUserContext.Provider>
   );
