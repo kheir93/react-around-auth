@@ -33,8 +33,9 @@ function Header({ logout, userEmail }) {
     <header className="header">
 
       <img src={logo} className="logo" alt="logo" />
-        <button className={`header__close ${buttonState ? 'header__close_display' : ''}`} onClick={toggleMenu}></button>
+
       <Route exact path="/">
+          <button className={`header__close ${buttonState ? 'header__close_display' : ''}`} onClick={toggleMenu}></button>
         <Navbar onClick={toggleMobile} isClicked={toggleNavbar} />
         <p className="header__user-display-info">{userEmail}</p>
         <button className="header__logout-button" onClick={logout}>Log out</button>

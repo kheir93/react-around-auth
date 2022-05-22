@@ -1,6 +1,7 @@
 .header__auth-info {
   width: 75px;
   margin-left: auto;
+  margin-bottom: 0;
   border: 0;
   box-sizing: border-box;
   background-color: transparent;
@@ -11,8 +12,10 @@
   padding-bottom: 14px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .header__auth-info {
+    padding-bottom:0;
+    margin-top: auto;
     font-size: 14px;
     grid-area: email;
   }
